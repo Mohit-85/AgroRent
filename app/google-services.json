@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "56201511529",
+    "firebase_url": "https://forfarner-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "forfarner",
+    "storage_bucket": "forfarner.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56201511529:android:ee8abf290c4e4580f718f8",
+        "android_client_info": {
+          "package_name": "com.example.forfarmer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwSMrSJoRiTAt3_Ig-r5QJ_fc7AyitQ90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

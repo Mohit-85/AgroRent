@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".splashActivity">
+
+<!--    <com.airbnb.lottie.LottieAnimationView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/animation_view"-->
+<!--        app:lottie_fileName="Animatio.json"-->
+<!--        app:lottie_autoPlay="true"-->
+<!--        app:lottie_loop="true" />-->
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:src="@drawable/splash"/>
+</RelativeLayout>

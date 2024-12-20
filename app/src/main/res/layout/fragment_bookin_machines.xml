@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5"
+    tools:context=".Bookin_machines">
+
+    <!-- Machine Image -->
+    <ImageView
+        android:id="@+id/machineImageView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="16dp"
+        android:background="#E0E0E0"
+        android:layout_gravity="center" />
+
+    <!-- Machine Name -->
+    <TextView
+        android:id="@+id/machineNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Machine Name"
+        android:textSize="20sp"
+        android:textColor="#333333"
+        android:fontFamily="sans-serif-medium"
+        android:paddingBottom="8dp"
+        android:textStyle="bold" />
+
+    <!-- Machine Price -->
+    <TextView
+        android:id="@+id/machinePriceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Price per day: ₹1000"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:paddingBottom="8dp" />
+
+    <!-- Machine Location -->
+    <TextView
+        android:id="@+id/machineLocationTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Location: Delhi"
+        android:textSize="18sp"
+        android:textColor="#333333"
+        android:paddingBottom="16dp" />
+
+    <!-- User Name Input -->
+    <EditText
+        android:id="@+id/userNameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- User Contact Input -->
+    <EditText
+        android:id="@+id/userContactEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your contact number"
+        android:inputType="phone"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Start Date Input -->
+    <EditText
+        android:id="@+id/startDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter start date (YYYY-MM-DD)"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_marginBottom="12dp" />
+
+    <!-- End Date Input -->
+    <EditText
+        android:id="@+id/endDateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter end date (YYYY-MM-DD)"
+        android:background="@drawable/edittext_background"
+        android:padding="12dp"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Book Button -->
+    <Button
+        android:id="@+id/bookbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/buttoncorneredge"
+        android:padding="12dp"
+        android:text="Sing up"
+        android:textSize="17dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:backgroundTint="#709647"
+        app:cornerRadius="17dp" />
+
+</LinearLayout>

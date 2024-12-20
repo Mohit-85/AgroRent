@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="nav_item_color">#53E79A</color>
+    <color name="nav_item_ripple_color">#AA4FD966</color>
+    <color name="colorSelected">#53E79A</color> <!-- Orange -->
+    <color name="colorDefault">#FF000000</color> <!-- Grey -->
+    <color name="colorHint">#888888</color>  <!-- Light gray hint text -->
+    <color name="colorText">#000000</color>  <!-- Black text color -->
+    <color name="colorPrimary">#FF4081</color> <!-- Example primary color for icons -->
+
+    <color name="hintColor">#AA4FD966</color>
+
+
+</resources>

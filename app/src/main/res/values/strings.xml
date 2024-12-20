@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">For Farmer</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="english">English</string>
+    <string name="hindi">Hindi</string>
+    <string name="default_web_client_id">56201511529-aq5ai3tgadumv0v6o3h0m5lhhl62nd6q.apps.googleusercontent.com</string>
+</resources>

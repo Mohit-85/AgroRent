@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".userDetailInput">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Profile Picture -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/img_3"
+            android:background="@drawable/circle_backgound" />
+
+        <Button
+            android:id="@+id/uploadPhotoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="#709647"
+            android:text="Upload Photo" />
+
+        <!-- Name -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:hint="  Name"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#666666" />
+
+        <!-- Phone -->
+        <EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animation_view"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:hint="  Phone"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#666666" />
+
+        <!-- Location -->
+        <EditText
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/animation_view"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="21dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/edittext_background"
+            android:hint="  Location"
+            android:inputType="textEmailAddress"
+            android:padding="12dp"
+            android:textColor="#000000"
+            android:textColorHint="#666666" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/saveProfileButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Profile"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="#709647"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+
+
+</ScrollView>
