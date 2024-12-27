@@ -1,6 +1,7 @@
 package com.example.forfarmer;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.widget.SearchView;
@@ -36,6 +38,7 @@ public class BlankFragment extends BaseFragment {
     DatabaseReference machineRef , userRef;
     SearchView searchView;
     TextView profileNameTextView;
+    ImageView noti;
 
 
 
@@ -49,7 +52,19 @@ public class BlankFragment extends BaseFragment {
         recyclerView = view.findViewById(R.id.machineRecyclerView);
         searchView = view.findViewById(R.id.searchView);
         profileNameTextView  = view.findViewById(R.id.welcomeText);
+        noti = view.findViewById(R.id.noti);
 
+        noti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment notificationFragment = new NotificationFragment();
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framelayout, notificationFragment) // Use your container ID
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         // Set GridLayoutManager for 2 columns
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 

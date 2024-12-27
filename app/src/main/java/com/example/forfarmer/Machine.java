@@ -8,11 +8,12 @@ public class Machine {
     private String imageUrl;
     private String ownerId;
     private String description;
+    private String fcmToken;
 
     public Machine() {}
 
 
-    public Machine(String machineId, String machineName, String price, String location , String imageUrl , String ownerId, String description) {
+    public Machine(String machineId, String machineName, String price, String location , String imageUrl , String ownerId, String description , String fcmToken) {
         this.machineId = machineId;
         this.machineName = machineName;
         this.price = price;
@@ -20,6 +21,7 @@ public class Machine {
         this.imageUrl = imageUrl;
         this.ownerId = ownerId;
         this.description=description;
+        this.fcmToken=fcmToken;
 
     }
 

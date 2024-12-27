@@ -2,14 +2,23 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:background="#f8f9fa">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Machine"
+        android:textSize="24sp"
+        android:textColor="#333333"
+        android:gravity="center"/>
 
     <!-- Machine Name Input -->
     <EditText
@@ -22,7 +31,7 @@
         android:padding="12dp"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:background="@drawable/edittext_bg"/>
+        android:background="@drawable/edittext_background"/>
 
     <!-- Price Input -->
     <EditText
@@ -35,7 +44,7 @@
         android:padding="12dp"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:background="@drawable/edittext_bg"/>
+        android:background="@drawable/edittext_background"/>
 
     <!-- Location Input -->
     <EditText
@@ -48,7 +57,7 @@
         android:padding="12dp"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:background="@drawable/edittext_bg"/>
+        android:background="@drawable/edittext_background"/>
     <EditText
         android:id="@+id/discriptionEditText"
         android:layout_width="match_parent"
@@ -59,21 +68,37 @@
         android:padding="12dp"
         android:textColor="#333333"
         android:textSize="16sp"
-        android:background="@drawable/edittext_bg"/>
+        android:background="@drawable/edittext_background"/>
 
 
     <!-- Select Image Button -->
+<!--    <Button-->
+<!--        android:id="@+id/selectImageButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Select Image"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:background="#2196F3"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:padding="12dp"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_gravity="center"/>-->
     <Button
         android:id="@+id/selectImageButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Select Image"
-        android:textColor="#FFFFFF"
-        android:background="#2196F3"
-        android:layout_marginTop="20dp"
+        android:layout_below="@id/etLocation"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/buttoncorneredge"
         android:padding="12dp"
-        android:textSize="16sp"
-        android:layout_gravity="center"/>
+        android:text="Select Image"
+        android:textSize="17dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:backgroundTint="#709647"
+        app:cornerRadius="17dp" />
 
     <!-- Image View to Display Selected Image -->
     <ImageView
@@ -87,17 +112,32 @@
         android:layout_gravity="center"/>
 
     <!-- Upload Button -->
+<!--    <Button-->
+<!--        android:id="@+id/uploadButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Upload Machine"-->
+<!--        android:textColor="#FFFFFF"-->
+<!--        android:background="#4CAF50"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:padding="12dp"-->
+<!--        android:textSize="16sp"-->
+<!--        android:layout_gravity="center"/>-->
     <Button
         android:id="@+id/uploadButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload Machine"
-        android:textColor="#FFFFFF"
-        android:background="#4CAF50"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/buttoncorneredge"
         android:padding="12dp"
-        android:textSize="16sp"
-        android:layout_gravity="center"/>
+        android:text="Upload Machine"
+        android:textSize="17dp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:backgroundTint="#709647"
+        app:cornerRadius="17dp" />
 
 </LinearLayout>
 </ScrollView>

@@ -4,4 +4,10 @@
     <string name="english">English</string>
     <string name="hindi">Hindi</string>
     <string name="default_web_client_id">56201511529-aq5ai3tgadumv0v6o3h0m5lhhl62nd6q.apps.googleusercontent.com</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="facebook_app_id">1092422482361906</string>
+    <string name="fb_login_protocol_scheme">1092422482361906</string>
+    <string name="facebook_app_token">1092422482361906|09e0f3ae32ee106cafb68eeed4196d32</string>
+
 </resources>

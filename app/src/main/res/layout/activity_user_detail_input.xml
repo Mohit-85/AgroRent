@@ -50,7 +50,7 @@
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/animation_view"
+            android:layout_below="@id/etName"
             android:layout_marginStart="24dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="24dp"
@@ -66,7 +66,7 @@
             android:id="@+id/etLocation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/animation_view"
+            android:layout_below="@id/etPhone"
             android:layout_marginStart="24dp"
             android:layout_marginTop="21dp"
             android:layout_marginEnd="24dp"
@@ -78,14 +78,31 @@
             android:textColorHint="#666666" />
 
         <!-- Save Button -->
+<!--        <Button-->
+<!--            android:id="@+id/saveProfileButton"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            -->
+<!--            android:text="Save Profile"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:backgroundTint="#709647"-->
+<!--            android:textColor="#fff" />-->
         <Button
             android:id="@+id/saveProfileButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/etLocation"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/buttoncorneredge"
+            android:padding="12dp"
             android:text="Save Profile"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="#709647"
-            android:textColor="#fff" />
+            android:textSize="17dp"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            app:backgroundTint="#709647"
+            app:cornerRadius="17dp" />
     </LinearLayout>
 
 

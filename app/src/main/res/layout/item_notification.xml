@@ -1,0 +1,79 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:background="@drawable/card_background"
+    android:elevation="4dp"
+    android:layout_margin="8dp">
+
+    <!-- Title Section -->
+    <TextView
+        android:id="@+id/notificationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="@color/titleColor" />
+
+    <!-- Message Section -->
+    <TextView
+        android:id="@+id/notificationMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Message"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/messageColor" />
+
+    <!-- Person Number Section -->
+    <TextView
+        android:id="@+id/personPhoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone: 1234567890"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:textColor="#DB1414" />
+
+    <!-- Date and Time Section -->
+    <TextView
+        android:id="@+id/notificationTimestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date: 24-Dec-2024, Time: 10:30 AM"
+        android:textSize="12sp"
+        android:textColor="#888888"
+        android:layout_marginTop="8dp" />
+
+    <!-- Buttons Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        android:gravity="end">
+
+        <!-- Call Button -->
+        <Button
+            android:id="@+id/callButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Call"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/callButtonColor"
+            android:textColor="@android:color/white" />
+
+        <!-- Message Button -->
+<!--        <Button-->
+<!--            android:id="@+id/messageButton"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Message"-->
+<!--            android:backgroundTint="@color/buttonBackground"-->
+<!--            android:textColor="@android:color/white" />-->
+    </LinearLayout>
+
+</LinearLayout>

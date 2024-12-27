@@ -14,14 +14,14 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.forfarmer.ProfileUpdate;
+import com.example.forfarmer.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.ByteArrayOutputStream;
 
@@ -42,7 +42,7 @@ public class userDetailInput extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
         setContentView(R.layout.activity_user_detail_input);
 
         btnUpdate = findViewById(R.id.saveProfileButton);
@@ -52,15 +52,10 @@ public class userDetailInput extends AppCompatActivity {
         etLocation = findViewById(R.id.etLocation);
         profileImageView = findViewById(R.id.profileImageView);
 
-        
-        profileRef= FirebaseDatabase.getInstance().getReference("users");
-        
+        profileRef = FirebaseDatabase.getInstance().getReference("users");
+
         btnUpdate.setOnClickListener(v -> uploadProfileDetail());
         btnupload.setOnClickListener(v -> openImageSelector());
-
-
-
-
     }
 
     private void openImageSelector() {
@@ -96,22 +91,36 @@ public class userDetailInput extends AppCompatActivity {
             return;
         }
 
-        // Continue with profile upload
+        // Convert the image to Base64
         String base64Image = convertImageToBase64(bitmapImage);
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String userEmail = currentUser.getEmail();
         String profileId = profileRef.push().getKey();
 
-        ProfileUpdate profile = new ProfileUpdate(userEmail, name, phone, location, base64Image);
-        profileRef.child(profileId).setValue(profile)
-                .addOnSuccessListener(unused -> Toast.makeText(this, "Profile Uploaded Successfully!", Toast.LENGTH_SHORT).show())
-                .addOnFailureListener(e -> Toast.makeText(this, "Failed to upload profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+        // Fetch FCM token
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(this, "Failed to get FCM Token.", Toast.LENGTH_SHORT).show();
+                        Log.e("FCM Token", "Fetching FCM token failed", task.getException());
+                        return;
+                    }
+
+                    // Get the FCM token
+                    String fcmToken = task.getResult();
+                    Log.d("FCM Token", "Token: " + fcmToken);
+
+                    // Create profile object with FCM token
+                    ProfileUpdate profile = new ProfileUpdate(userEmail, name, phone, location, base64Image, fcmToken);
+
+                    // Store in Firebase Realtime Database
+                    profileRef.child(profileId).setValue(profile)
+                            .addOnSuccessListener(unused -> Toast.makeText(this, "Profile Uploaded Successfully!", Toast.LENGTH_SHORT).show())
+                            .addOnFailureListener(e -> Toast.makeText(this, "Failed to upload profile: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                });
     }
 
-
     private String convertImageToBase64(Bitmap bitmapImage) {
-
-        // Convert the image to a Base64 string
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
         // Compress the image (50% quality to reduce size)

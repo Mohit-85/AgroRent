@@ -29,19 +29,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Locale;
 
 public class addMachine_fragment extends BaseFragment {
 
-    EditText machineNameEditText;
-    EditText priceEditText , descriptionEditText;
-    EditText locationEditText;
-    View selectImageButton;
+    EditText machineNameEditText, priceEditText, descriptionEditText, locationEditText;
+    View selectImageButton, uploadButton;
     ImageView machineImageView;
-    View uploadButton;
     Uri imageUri;
     Bitmap bitmapImage; // To hold the selected image
     DatabaseReference machineRef;
@@ -52,8 +49,6 @@ public class addMachine_fragment extends BaseFragment {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_add_machine_fragment, container, false);
-        //FirebaseApp.initializeApp(getContext());
-
 
         machineNameEditText = view.findViewById(R.id.machineNameEditText);
         descriptionEditText = view.findViewById(R.id.discriptionEditText);
@@ -62,8 +57,6 @@ public class addMachine_fragment extends BaseFragment {
         selectImageButton = view.findViewById(R.id.selectImageButton);
         machineImageView = view.findViewById(R.id.machineImageView);
         uploadButton = view.findViewById(R.id.uploadButton);
-       // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-
 
         // Initialize Firebase reference
         machineRef = FirebaseDatabase.getInstance().getReference("machines");
@@ -75,14 +68,15 @@ public class addMachine_fragment extends BaseFragment {
         return view;
     }
 
+    // Method to initialize and save FCM token
+
+
     // Method to upload machine details to Firebase
     private void uploadMachine() {
         String machineName = machineNameEditText.getText().toString();
         String price = priceEditText.getText().toString();
         String location = locationEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
-
-
 
         // Check if all fields are filled and an image is selected
         if (TextUtils.isEmpty(machineName) || TextUtils.isEmpty(price) || TextUtils.isEmpty(location) || bitmapImage == null) {
@@ -97,8 +91,17 @@ public class addMachine_fragment extends BaseFragment {
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         String ownerId = currentUser.getEmail(); // or use currentUser.getEmail()
 
+        // Retrieve FCM token from SharedPreferences
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("FCM_PREF", MODE_PRIVATE);
+        String fcmToken = sharedPreferences.getString("fcmToken", null);
+
+        if (fcmToken == null) {
+            Toast.makeText(getContext(), "Failed to retrieve FCM token! Please ensure you are connected to the internet.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         // Create a Machine object with the data
-        Machine machine = new Machine(machineId, machineName, price, location , base64Image,ownerId , description);
+        Machine machine = new Machine(machineId, machineName, price, location, base64Image, ownerId, description, fcmToken);
         machineRef.child(machineId).setValue(machine)
                 .addOnSuccessListener(unused ->
                         Toast.makeText(getContext(), "Machine Uploaded Successfully!", Toast.LENGTH_SHORT).show()
@@ -107,9 +110,6 @@ public class addMachine_fragment extends BaseFragment {
                         Toast.makeText(getContext(), "Failed to upload machine: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                 );
     }
-
-    // Machine class to hold machine data
-
 
     // Method to open the image selector to pick an image
     private void openImageSelector() {
@@ -144,10 +144,6 @@ public class addMachine_fragment extends BaseFragment {
         byte[] byteArray = outputStream.toByteArray();
 
         // Convert to Base64 string
-        String base64Image = Base64.encodeToString(byteArray, Base64.DEFAULT);
-
-        Log.d("Base64 Image", "Base64 String: " + base64Image); // Log the Base64 string (optional)
-        return base64Image;
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
-
 }

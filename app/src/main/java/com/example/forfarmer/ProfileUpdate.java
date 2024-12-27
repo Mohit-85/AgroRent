@@ -9,22 +9,32 @@ public class ProfileUpdate {
     private String phone;
     private String location;
     private String profileImageUrl;
+    String fcmToken;
 
     // Default constructor
     public ProfileUpdate() {
     }
 
     // Constructor
-    public ProfileUpdate(String profileId, String name, String phone, String location, String profileImageUrl) {
+    public ProfileUpdate(String profileId, String name, String phone, String location, String profileImageUrl , String fcmToken) {
         this.name = name;
         this.phone = phone;
         this.location = location;
         this.profileImageUrl = profileImageUrl;
         this.profileId = profileId;
+        this.fcmToken=fcmToken;
     }
 
     // Getters and Setters
 
+
+    public void setFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
+    }
+
+    public String getFcmToken() {
+        return fcmToken;
+    }
 
     public String getProfileId() {
         return profileId;

@@ -12,5 +12,12 @@
 
     <color name="hintColor">#AA4FD966</color>
 
+    <color name="titleColor">#333333</color>
+    <color name="messageColor">#666666</color>
+    <color name="timestampColor">#888888</color>
+
+    <color name="confirmButtonColor">#4CAF50</color>
+    <color name="cancelButtonColor">#F44336</color>
+    <color name="callButtonColor">#4CAF50</color> <!-- Green -->
 
 </resources>
