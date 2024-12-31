@@ -27,6 +27,7 @@ public class NotificationFragment extends Fragment {
     private RecyclerView notificationRecyclerView;
     private NotificationAdapter adapter;
     private List<Notification> notificationList = new ArrayList<>();
+    String sanitizedEmail;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,8 +35,12 @@ public class NotificationFragment extends Fragment {
 
         notificationRecyclerView = view.findViewById(R.id.notificationRecyclerView);
         notificationRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Sanitize email
+        String ownerEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        sanitizedEmail = ownerEmail.replace(".", "_").replace("@", "_at_");
+        Log.d("NotificationFragment", "Sanitized Email: " + sanitizedEmail);
 
-        adapter = new NotificationAdapter(notificationList, getContext());
+        adapter = new NotificationAdapter(notificationList, getContext(),sanitizedEmail);
         notificationRecyclerView.setAdapter(adapter);
 
         loadNotification();
@@ -44,11 +49,7 @@ public class NotificationFragment extends Fragment {
     }
 
     private void loadNotification() {
-        String ownerEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        // Sanitize email
-        String sanitizedEmail = ownerEmail.replace(".", "_").replace("@", "_at_");
-        Log.d("NotificationFragment", "Sanitized Email: " + sanitizedEmail);
 
         // Use sanitized email to fetch notifications
         DatabaseReference notificationRef = FirebaseDatabase

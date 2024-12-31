@@ -61,6 +61,9 @@ dependencies {
     implementation(libs.androidx.cardview)
     implementation(libs.material.v190)
     implementation (libs.facebook.login)
+    implementation (libs.androidx.viewpager2)
+    implementation (libs.material)
+
 
 
 

@@ -1,5 +1,7 @@
 package com.example.forfarmer;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,10 +26,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     private List<Notification> notifications;
     private Context context;
+    private String userPath;
 
-    public NotificationAdapter(List<Notification> notifications , Context context) {
+    public NotificationAdapter(List<Notification> notifications , Context context , String userPath) {
         this.notifications = notifications;
         this.context = context;
+        this.userPath = userPath;
     }
 
     @NonNull
@@ -37,8 +41,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         return new NotificationViewHolder(view);
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull NotificationViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull NotificationViewHolder holder , @SuppressLint("RecyclerView") int position) {
         Notification notification = notifications.get(position);
         holder.titleTextView.setText(notification.getTitle());
         holder.messageTextView.setText(notification.getMessage());
@@ -60,11 +65,52 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
         });
 
-    }
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                showDetailsDialog(notification , position);
+                return true;
+            }
+        });
 
+
+    }
     @Override
     public int getItemCount() {
         return notifications.size();
+    }
+
+    private void showDetailsDialog(Notification notification , int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Delete Notification ")
+                .setMessage("Are you sure you want to delete this notification?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    deletenotification(notification,position);
+                }).setNegativeButton("No", (dialog, which) -> {
+                    dialog.dismiss();
+                }).show();
+
+    }
+    private void deletenotification(Notification notification, int position) {
+        DatabaseReference notificationsRef = FirebaseDatabase.getInstance().getReference("notifications")
+                .child(userPath)
+                .child(notification.getNotificationId());
+
+        notificationsRef.removeValue()
+                .addOnSuccessListener(aVoid -> {
+                    // Ensure the position is within bounds before removing
+                    if (position >= 0 && position < notifications.size()) {
+                        notifications.remove(position); // Remove the item from the list
+                        notifyItemRemoved(position);    // Notify RecyclerView of item removal
+                        notifyItemRangeChanged(position, notifications.size()); // Update subsequent items
+                        Toast.makeText(context, "Notification deleted successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, "Invalid position for deletion.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(context, "Failed to delete notification: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     public class NotificationViewHolder extends RecyclerView.ViewHolder {
