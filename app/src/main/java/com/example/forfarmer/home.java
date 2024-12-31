@@ -52,6 +52,10 @@ public class home extends BaseActivity {
             } else if (itemId == R.id.nav_profile){
                 selectedFragment = new profile_fragment();
             }
+            else if (itemId == R.id.nav_services){
+                selectedFragment = new ServiecFragment();
+            }
+
             return loadFragment( selectedFragment);
         });
 

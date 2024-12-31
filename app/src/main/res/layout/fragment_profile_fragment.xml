@@ -21,7 +21,7 @@
             android:text="Edit"
             android:src="@drawable/baseline_edit_24"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="#F4F3F6"
+            android:backgroundTint="#F8F6F8"
             android:textColor="#FFFFFF" />
 
         <!-- Logout Button -->
