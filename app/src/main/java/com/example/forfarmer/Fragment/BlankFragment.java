@@ -1,23 +1,26 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.widget.SearchView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.forfarmer.Adapter.MachineAdapter;
+import com.example.forfarmer.BaseFragment;
+import com.example.forfarmer.Class.Machine;
+import com.example.forfarmer.R;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,36 +38,33 @@ public class BlankFragment extends BaseFragment {
     MachineAdapter machineAdapter;
     List<Machine> machineList;
     List<Machine> filteredMachineList;
-    DatabaseReference machineRef , userRef;
+    DatabaseReference machineRef, userRef;
     SearchView searchView;
     TextView profileNameTextView;
     ImageView noti;
-
-
+    ChipGroup chipGroup;
 
     @SuppressLint({"MissingInflatedId", "WrongViewCast"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_blank, container, false);
 
         // Initialize views
         recyclerView = view.findViewById(R.id.machineRecyclerView);
         searchView = view.findViewById(R.id.searchView);
-        profileNameTextView  = view.findViewById(R.id.welcomeText);
+        chipGroup = view.findViewById(R.id.filterChipGroup);
+        profileNameTextView = view.findViewById(R.id.welcomeText);
         noti = view.findViewById(R.id.noti);
 
-        noti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment notificationFragment = new NotificationFragment();
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.framelayout, notificationFragment) // Use your container ID
-                        .addToBackStack(null)
-                        .commit();
-            }
+        noti.setOnClickListener(v -> {
+            Fragment notificationFragment = new NotificationFragment();
+            getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.framelayout, notificationFragment)
+                    .addToBackStack(null)
+                    .commit();
         });
+
         // Set GridLayoutManager for 2 columns
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -73,10 +73,7 @@ public class BlankFragment extends BaseFragment {
 
         machineRef = FirebaseDatabase.getInstance().getReference("machines");
         userRef = FirebaseDatabase.getInstance().getReference("users");
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userEmail = currentUser.getEmail();
         fetchUserDetail();
-        // Fetch machine data from Firebase
         fetchMachineData();
 
         // Setup search functionality
@@ -88,8 +85,24 @@ public class BlankFragment extends BaseFragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                filterMachines(newText);
+                filterMachinesByQuery(newText);
                 return true;
+            }
+        });
+
+        // Handle chip selection
+        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (!checkedIds.isEmpty()) {
+                Chip selectedChip = group.findViewById(checkedIds.get(0));
+                if (selectedChip != null) {
+                    String chipText = selectedChip.getText().toString();
+                    filterMachinesByPrice(chipText);
+                }
+            } else {
+                // No chip selected, reset to show all machines
+                filteredMachineList.clear();
+                filteredMachineList.addAll(machineList);
+                machineAdapter.notifyDataSetChanged();
             }
         });
 
@@ -104,16 +117,13 @@ public class BlankFragment extends BaseFragment {
             return;
         }
 
-        // Query to find the user data based on the email
         userRef.orderByChild("profileId").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         String name = userSnapshot.child("name").getValue(String.class);
-                        // Display the fetched data
-                        profileNameTextView.setText(name != null ? "Hi "+name : "Hi Karim! \uD83D\uDC4B");
-                        //profilePhoneTextView.setText(phone != null ? phone : "No Phone Available");
+                        profileNameTextView.setText(name != null ? "Hi " + name : "Hi User! 👋");
                     }
                 } else {
                     Toast.makeText(getActivity(), "User data not found!", Toast.LENGTH_SHORT).show();
@@ -130,31 +140,28 @@ public class BlankFragment extends BaseFragment {
     private void fetchMachineData() {
         machineRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 machineList.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Machine machine = dataSnapshot.getValue(Machine.class);
                     machineList.add(machine);
                 }
 
-                // Initially, show all machines
+                // Initially show all machines
                 filteredMachineList.clear();
                 filteredMachineList.addAll(machineList);
-                machineAdapter = new MachineAdapter(getContext(), filteredMachineList, machine -> {
-                    openBookingFragment(machine);
-                });
-
+                machineAdapter = new MachineAdapter(getContext(), filteredMachineList, machine -> openBookingFragment(machine));
                 recyclerView.setAdapter(machineAdapter);
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getContext(), "Failed to load machines: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void filterMachines(String query) {
+    private void filterMachinesByQuery(String query) {
         filteredMachineList.clear();
         if (query.isEmpty()) {
             filteredMachineList.addAll(machineList);
@@ -166,7 +173,24 @@ public class BlankFragment extends BaseFragment {
                 }
             }
         }
+        machineAdapter.notifyDataSetChanged();
+    }
 
+    private void filterMachinesByPrice(String priceRange) {
+        filteredMachineList.clear();
+
+        for (Machine machine : machineList) {
+            try {
+                int price = Integer.parseInt(machine.getPrice());
+                if (priceRange.equals("Below ₹5,000") && price < 5000 ||
+                        priceRange.equals("₹5,000 - ₹10,000") && price >= 5000 && price <= 10000 ||
+                        priceRange.equals("Above ₹10,000") && price > 10000) {
+                    filteredMachineList.add(machine);
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(getContext(), "Error parsing price", Toast.LENGTH_SHORT).show();
+            }
+        }
         machineAdapter.notifyDataSetChanged();
     }
 

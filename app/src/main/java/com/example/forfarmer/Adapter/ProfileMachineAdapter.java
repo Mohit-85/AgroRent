@@ -1,4 +1,4 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.forfarmer.Class.Machine;
+import com.example.forfarmer.R;
 
 import java.util.List;
 

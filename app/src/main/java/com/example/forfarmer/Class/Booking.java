@@ -1,4 +1,4 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Class;
 
 public class Booking {
 

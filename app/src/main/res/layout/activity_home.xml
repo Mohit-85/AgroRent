@@ -28,8 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:labelVisibilityMode="selected"
-        style="@style/Theme.ForFarmer"
-
-        app:itemRippleColor="@color/nav_item_ripple_color"/>
+       style="@style/Theme.ForFarmer"
+       app:itemRippleColor="@color/nav_item_ripple_color"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

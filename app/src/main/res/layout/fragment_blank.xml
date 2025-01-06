@@ -1,148 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    android:background="#f8f9fa">
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f8f9fa">
 
-    android:padding="16dp">
-
-
-    <!-- Welcome Section -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/welcomeSection"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
+        <!-- Welcome Section -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/welcomeSection"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Hi Karim! 👋"
-            android:textColor="#4CAF50"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/enjoyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enjoy our services!"
-            android:textColor="#757575"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
-
-        <ImageView
-            android:id="@+id/noti"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:contentDescription="Notification Icon"
-            android:src="@drawable/baseline_notifications_24"
+            android:paddingBottom="16dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hi Kishan! 👋"
+                android:textColor="#4CAF50"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Search Section -->
-    <LinearLayout
-        android:id="@+id/searchBarLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/edittext_bg"
-        android:padding="12dp"
-        
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/welcomeSection"
-        android:layout_marginTop="16dp">
+            <TextView
+                android:id="@+id/enjoyText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enjoy our services!"
+                android:textColor="#757575"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/welcomeText" />
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="310dp"
+            <ImageView
+                android:id="@+id/noti"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:contentDescription="Notification Icon"
+                android:src="@drawable/baseline_notifications_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Search Section -->
+        <LinearLayout
+            android:id="@+id/searchBarLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:queryHint="Search..."/>
+            android:orientation="vertical"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/welcomeSection"
+            android:layout_marginTop="16dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="48dp"
-            android:background="@drawable/baseline_filter_alt_24"
-            android:contentDescription="Notification Icon" />
-    </LinearLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_view_bg"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search..." />
 
-    <!-- Free Consultation Card -->
-    <LinearLayout
-        android:id="@+id/consultationCard"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/rounded_bg"
-        android:padding="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchBarLayout"
-        android:layout_marginTop="16dp">
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/filterChipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:singleSelection="true"
+                android:layout_marginTop="8dp">
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFilterName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    app:chipIcon="@drawable/baseline_filter_alt_24"
+                    app:chipIconVisible="true"
+                    app:closeIconVisible="false"
+                    style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFilterLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location"
+                    app:chipIcon="@drawable/baseline_lock_24"
+                    app:chipIconVisible="true"
+                    app:closeIconVisible="false"
+                    style="@style/Widget.MaterialComponents.Chip.Filter" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFilterPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    app:chipIcon="@drawable/baseline_attach_money_24"
+                    app:chipIconVisible="true"
+                    app:closeIconVisible="false"
+                    style="@style/Widget.MaterialComponents.Chip.Filter" />
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
+        <!-- Service Card -->
+        <HorizontalScrollView
+            android:id="@+id/service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchBarLayout">
+
+            <LinearLayout
+                android:id="@+id/serviceCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/rounded_bg"
+                android:padding="16dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/seeds"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/img_5"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="4dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/machine"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/img_8"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="4dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/medical"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/img_9"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="4dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/land"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/img_7"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="4dp" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/worker"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/img_6"
+                    android:layout_marginLeft="10dp"
+                    android:elevation="4dp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Featured Products Section -->
         <TextView
+            android:id="@+id/featuredTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Free Consultation"
+            android:text="Featured Products"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF" />
+            android:textColor="#333333"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/service"
+            android:layout_marginTop="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/machineRecyclerView"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Get free support from our customer service"
-            android:textSize="14sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/callNowButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Call Now"
-            android:backgroundTint="#FFFFFF"
-            android:textColor="#4CAF50" />
-    </LinearLayout>
-
-    <!-- Featured Products Section -->
-    <TextView
-        android:id="@+id/featuredTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Featured Products"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="#333333"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/consultationCard"
-        android:layout_marginTop="16dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/machineRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/featuredTitle"
-        android:layout_marginTop="8dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/featuredTitle"
+            android:layout_marginTop="8dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,4 +1,4 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Fragment;
 
 import android.os.Bundle;
 
@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.forfarmer.Adapter.ProfileMachineAdapter;
+import com.example.forfarmer.Class.Machine;
+import com.example.forfarmer.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;

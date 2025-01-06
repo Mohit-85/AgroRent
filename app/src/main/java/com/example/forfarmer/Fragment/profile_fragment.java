@@ -1,5 +1,7 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Fragment;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,8 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -18,11 +18,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+import com.example.forfarmer.Adapter.ProfileMachineAdapter;
+import com.example.forfarmer.Class.Machine;
+import com.example.forfarmer.MainActivity;
+import com.example.forfarmer.R;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +37,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class profile_fragment extends Fragment {
@@ -41,7 +44,7 @@ public class profile_fragment extends Fragment {
     private ImageView profileImageView;
     private TextView profileNameTextView, profileLocationTextView;
     private RecyclerView ownedMachinesRecyclerView;
-    private Button settingsButton, contactUsButton, logoutButton;
+    private ImageButton settingsButton, contactUsButton, logoutButton;
 
     private DatabaseReference machineRef, userRef;
     private ProfileMachineAdapter profileMachineAdapter;
@@ -52,6 +55,7 @@ public class profile_fragment extends Fragment {
     private TabLayout tabLayout;
     private FragmentStateAdapter pagerAdapter;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,7 +66,7 @@ public class profile_fragment extends Fragment {
         profileImageView = view.findViewById(R.id.profileImageView);
         profileNameTextView = view.findViewById(R.id.profileNameTextView);
         profileLocationTextView = view.findViewById(R.id.profileLocationTextView);
-//        logoutButton = view.findViewById(R.id.logoutButton);
+        logoutButton = view.findViewById(R.id.logoutButton);
 
         // TabLayout and ViewPager2
         viewPager = view.findViewById(R.id.viewPager);
@@ -105,14 +109,25 @@ public class profile_fragment extends Fragment {
             }
         }).attach();
 
+
         // logout functionality
-//        logoutButton.setOnClickListener(view1 -> {
-//            FirebaseAuth.getInstance().signOut(); // Log out the user
-//            Intent intent = new Intent(getActivity(), MainActivity.class); // Redirect to login screen
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear back stack
-//            startActivity(intent);
-//            Toast.makeText(getActivity(), "Logged out successfully", Toast.LENGTH_SHORT).show();
-//        });
+        logoutButton.setOnClickListener(view1 -> {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Log Out ")
+                    .setMessage("Are you sure you want to Logout")
+                    .setPositiveButton("LogOut", (dialog, which) -> {
+                        FirebaseAuth.getInstance().signOut(); // Log out the user
+                        Intent intent = new Intent(getActivity(), MainActivity.class); // Redirect to login screen
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Clear back stack
+                        startActivity(intent);
+                        Toast.makeText(getActivity(), "Logged out successfully", Toast.LENGTH_SHORT).show();
+                    }).setNegativeButton("Cancel", (dialog, which) -> {
+                        dialog.dismiss();
+                    }).show();
+
+
+        });
 
         fetchUserDetails();
 

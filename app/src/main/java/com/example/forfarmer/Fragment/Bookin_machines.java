@@ -1,4 +1,4 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Fragment;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,6 +17,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.forfarmer.Class.Booking;
+import com.example.forfarmer.Class.Notification;
+import com.example.forfarmer.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

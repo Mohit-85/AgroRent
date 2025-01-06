@@ -1,25 +1,15 @@
 package com.example.forfarmer;
 
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
-import com.example.forfarmer.R;
+import com.example.forfarmer.Fragment.BlankFragment;
+import com.example.forfarmer.Fragment.ServiecFragment;
+import com.example.forfarmer.Fragment.addMachine_fragment;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import com.example.forfarmer.Fragment.profile_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class home extends BaseActivity {

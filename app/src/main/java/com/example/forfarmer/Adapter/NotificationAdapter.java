@@ -1,4 +1,4 @@
-package com.example.forfarmer;
+package com.example.forfarmer.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.forfarmer.Class.Notification;
+import com.example.forfarmer.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
